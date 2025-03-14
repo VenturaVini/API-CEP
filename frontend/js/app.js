@@ -1,50 +1,60 @@
-const API_URL = 'https://viacep.com.br/ws'; // Exemplo de API de CEP
+const IP = "http://45.77.150.143:4800";
+const API_URL = `${IP}/cep/`;
 
-document.getElementById('cep-form')?.addEventListener('submit', async function(event) {
-    event.preventDefault(); // Impede o recarregamento da página
-    
-    const cepInput = document.getElementById('numero-cep');
-    const CEP = cepInput.value.trim();
 
-    if (!CEP) {
-        showMessage('Por favor, digite um CEP válido.', 'error');
+// Alternar modo escuro
+const toggleDarkModeButton = document.getElementById("toggle-dark-mode");
+if (localStorage.getItem("dark-mode") === "enabled") {
+    document.body.classList.add("dark-mode");
+    toggleDarkModeButton.textContent = "☀️ Modo Claro";
+}
+
+toggleDarkModeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    const isDarkMode = document.body.classList.contains("dark-mode");
+
+    toggleDarkModeButton.textContent = isDarkMode ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+    localStorage.setItem("dark-mode", isDarkMode ? "enabled" : "disabled");
+});
+
+// Buscar CEP
+document.getElementById("cep-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const cep = document.getElementById("numero-cep").value.trim();
+    const cepResult = document.getElementById("cep-result");
+
+    if (!cep || cep.length !== 8 || isNaN(cep)) {
+        showMessage("Digite um CEP válido!", "error");
         return;
     }
 
     try {
-        const response = await fetch(`${API_URL}/${CEP}/json`);
-
-        if (!response.ok) {
-            throw new Error('Erro ao buscar CEP.');
-        }
+        const response = await fetch(`${API_URL}${cep}`);
+        if (!response.ok) throw new Error("Erro ao buscar o CEP!");
 
         const data = await response.json();
-        showMessage(`CEP encontrado: ${data.logradouro}, ${data.localidade} - ${data.uf}`, 'success');
-
+        if (data.erro) {
+            showMessage("CEP não encontrado!", "error");
+        } else {
+            cepResult.innerHTML = `
+                <strong>CEP:</strong> ${data.cep} <br>
+                <strong>Endereço:</strong> ${data.logradouro} <br>
+                <strong>Bairro:</strong> ${data.bairro} <br>
+                <strong>Cidade:</strong> ${data.localidade} - ${data.uf}
+            `;
+            cepResult.className = "success";
+            cepResult.style.display = "block";
+        }
     } catch (error) {
-        showMessage(error.message, 'error');
+        showMessage("Erro ao buscar o CEP. Verifique a conexão.", "error");
     }
 });
 
+// Exibir mensagens de erro/sucesso
 function showMessage(message, type) {
-    alert(`${type.toUpperCase()}: ${message}`);
+    const cepResult = document.getElementById("cep-result");
+    cepResult.textContent = message;
+    cepResult.className = type;
+    cepResult.style.display = "block";
 }
-
-
-document.getElementById('toggle-dark-mode').addEventListener('click', function() {
-    document.body.classList.toggle('dark-mode'); // Alterna entre claro e escuro
-
-    // Salvar a preferência no localStorage para manter o estado ao recarregar a página
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        localStorage.setItem('darkMode', 'disabled');
-    }
-});
-
-// Verificar e aplicar a preferência do usuário ao carregar a página
-window.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-    }
-});

@@ -1,0 +1,28 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "4800:4800"
+    networks:
+      - app-network
+    environment:
+      - PYTHONUNBUFFERED=1
+
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "4802:80"
+    networks:
+      - app-network
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    image: nginx:alpine
+
+networks:
+  app-network:
+    driver: bridge
+

@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/styles.css"> Link para o arquivo CSS
+    <title>Consulta CEP</title>
+    <link rel="stylesheet" href="css/styles.css">
     <script src="js/app.js" defer></script>
 </head>
 <body>
-    <!-- Botão para alternar o modo escuro -->
-    <!-- <button id="toggle-dark-mode" class="dark-mode-toggle">Modo Escuro</button> -->
-    <button id="toggle-dark-mode" class="dark-mode-toggle">Modo Escuro</button>
-
+    <button id="toggle-dark-mode" class="dark-mode-toggle">🌙 Modo Escuro</button>
 
     <div class="container">
+        <h2>Consultar CEP</h2>
         <div class="api-cep-container">
-            <h1>Login</h1>
             <form id="cep-form">
-                <input type="number" id="numero-cep" placeholder="Digite o número do CEP (sem caracteres)" required>
-                <button type="submit" class="btn">Entrar</button>
+                <input type="text" id="numero-cep" placeholder="Digite o CEP (Ex: 50940230)" maxlength="8" required>
+                <button type="submit" class="btn">Buscar</button>
             </form>
         </div>
+        <p id="cep-result"></p>
     </div>
 </body>
 </html>
