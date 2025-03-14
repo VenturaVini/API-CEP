@@ -1,0 +1,110 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+}
+
+/* Corpo da Página */
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container Principal */
+.container {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+}
+
+/* Input */
+.api-cep-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* Botão de Buscar */
+.api-cep-container .btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+.api-cep-container .btn:hover {
+    background: linear-gradient(45deg, #0056b3, #004080);
+    transform: scale(1.05);
+}
+
+/* Modo Escuro */
+.dark-mode {
+    background-color: #1e1e2e;
+    color: #ffffff;
+}
+
+.dark-mode .container {
+    background: #252537;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Botão de Modo Escuro */
+.dark-mode-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 15px;
+    border: none;
+    background: #007bff;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dark-mode-toggle:hover {
+    background: #0056b3;
+}
+
+/* Mensagens de resposta */
+#cep-result {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    display: none; /* Esconde até ter uma resposta */
+}
+
+/* Estilo para mensagens de sucesso e erro */
+.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

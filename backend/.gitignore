@@ -1,0 +1,30 @@
+# Diretório do ambiente virtual
+venv/
+.env/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Configurações do editor
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Dependências instaladas
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Arquivos do Jupyter Notebook
+.ipynb_checkpoints/
+
+# Configuração do sistema operacional
+Thumbs.db

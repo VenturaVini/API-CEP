@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta CEP</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <button id="toggle-dark-mode" class="dark-mode-toggle">🌙 Modo Escuro</button>
+
+    <div class="container">
+        <h2>Consultar CEP</h2>
+        <div class="api-cep-container">
+            <form id="cep-form">
+                <input type="text" id="numero-cep" placeholder="Digite o CEP (Ex: 50940230)" maxlength="8" required>
+                <button type="submit" class="btn">Buscar</button>
+            </form>
+        </div>
+        <p id="cep-result"></p>
+    </div>
+</body>
+</html>
