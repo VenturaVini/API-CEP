@@ -38,10 +38,31 @@ document.getElementById("cep-form").addEventListener("submit", async function (e
             showMessage("CEP não encontrado!", "error");
         } else {
             cepResult.innerHTML = `
-                <strong>CEP:</strong> ${data.cep} <br>
-                <strong>Endereço:</strong> ${data.logradouro} <br>
-                <strong>Bairro:</strong> ${data.bairro} <br>
-                <strong>Cidade:</strong> ${data.localidade} - ${data.uf}
+                <div>
+                    <strong>Localidade:</strong> <br>
+                    <strong>CEP:</strong> ${data.cep} <br>
+                    <strong>Endereço:</strong> ${data.logradouro} <br>
+                    <strong>Bairro:</strong> ${data.bairro} <br>
+                    <strong>Cidade:</strong> ${data.localidade} - ${data.uf}
+                </div>
+
+                <hr style="margin: 10px 0;"> <!-- Linha separadora -->
+
+                <div>
+                    <strong>Condições Climáticas:</strong> <br>
+                    <strong>Estado Atual:</strong> ${data.estado_atual} <br>
+                    <strong>Descrição:</strong> ${data.descricao}
+                </div>
+
+                <hr style="margin: 10px 0;"> <!-- Linha separadora -->
+
+                <div>
+                    <strong>Temperatura:</strong> ${data.temperatura}°C <br>
+                    <strong>Sensação Térmica:</strong> ${data.sensacao_termica}°C <br>
+                    <strong>Temperatura Mínima:</strong> ${data.temperatura_minima}°C <br>
+                    <strong>Temperatura Máxima:</strong> ${data.temperatura_maxima}°C <br>
+                    <strong>Umidade:</strong> ${data.umidade}%
+                </div>
             `;
             cepResult.className = "success";
             cepResult.style.display = "block";
@@ -50,6 +71,7 @@ document.getElementById("cep-form").addEventListener("submit", async function (e
         showMessage("Erro ao buscar o CEP. Verifique a conexão.", "error");
     }
 });
+
 
 // Exibir mensagens de erro/sucesso
 function showMessage(message, type) {
