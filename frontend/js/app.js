@@ -1,4 +1,5 @@
 const IP = "http://45.77.150.143:4800";
+// const IP = "http://localhost:4800";
 const API_URL = `${IP}/cep/`;
 
 
@@ -62,6 +63,12 @@ document.getElementById("cep-form").addEventListener("submit", async function (e
                     <strong>Temperatura Mínima:</strong> ${data.temperatura_minima}°C <br>
                     <strong>Temperatura Máxima:</strong> ${data.temperatura_maxima}°C <br>
                     <strong>Umidade:</strong> ${data.umidade}%
+                </div>
+
+                <hr style="margin: 10px 0;"> <!-- Linha separadora -->
+
+                <div>
+                    <strong>Frase: ${data.frase_aleatoria}<br>
                 </div>
             `;
             cepResult.className = "success";
