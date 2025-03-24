@@ -2,6 +2,7 @@ import requests
 from fastapi import APIRouter, HTTPException
 from deep_translator import GoogleTranslator
 import telebot
+from services.api_frases_aleatorias import obter_frase_aleatoria
 
 
 
@@ -40,7 +41,7 @@ def obter_clima_cidade(cidade: str, token: str = '72c4ae5b5e5d07b13944a5e8e03877
     except:       
         clima['estado_atual'] = requisicao.json()['weather'][0]['main']
 
-    clima['descricao'] = requisicao.json()['weather'][0]['description']
+    clima['descricao'] = requisicao.json()['weather'][0]['description'].title()
     
     return clima
 
@@ -56,8 +57,12 @@ def get_cep(cep: str):
 
     dados_cep = requisicao.json()
 
+    frase_aleatoria = obter_frase_aleatoria()
+
     # adicionar os dados do clima na requisicao do cep
     dados_cep.update(complemento_api_clima)
+
+    dados_cep.update({'frase_aleatoria': frase_aleatoria})
 
     # enviar_mensagem(f'CEP {cep} consultado: Rua {requisicao.json()["logradouro"]}, Bairro {requisicao.json()["bairro"]}, Cidade {requisicao.json()["localidade"]}, Estado {requisicao.json()["uf"]}')
     enviar_mensagem(
@@ -70,7 +75,10 @@ def get_cep(cep: str):
     f"\n"
     f"Clima Atual: {dados_cep.get('estado_atual', 'Não disponível')}\n"
     f"Descrição: {dados_cep.get('descricao', 'Não disponível')}\n"
-    f"Temperatura: {dados_cep.get('temperatura', 'Não disponível')}"
+    f"Temperatura: {dados_cep.get('temperatura', 'Não disponível')}\n"
+
+    f"\n"
+    f"Frase Aleatória: {dados_cep.get('frase_aleatoria', 'Não disponível')}"
     )   
 
     return dados_cep
